@@ -1,6 +1,7 @@
 const express = require('express');
-const { createServer } = require('@titaniumnetwork-dev/ultraviolet');
-const { UVMiddleware } = require('@titaniumnetwork-dev/ultraviolet/middleware');
+const { createServer } = require('ultraviolet-static');
+const { UVMiddleware } = require('ultraviolet-static/middleware');
+
 
 const app = express();
 const port = process.env.PORT || 8080;
