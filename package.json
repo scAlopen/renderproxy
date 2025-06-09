@@ -6,6 +6,6 @@
   },
   "dependencies": {
     "express": "^4.18.2",
-    "@titaniumnetwork-dev/ultraviolet": "^2.0.0"
+    "ultraviolet-static": "github:titaniumnetwork-dev/ultraviolet#main"
   }
 }
