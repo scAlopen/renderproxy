@@ -1,38 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Proxy</title>
+  <title>Proxy Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body { font-family: sans-serif; text-align: center; padding: 2em; background: #f5f5f5; }
-    input { padding: 0.5em; width: 300px; }
-    button { padding: 0.5em; }
-    footer { margin-top: 2em; font-size: 0.9em; color: gray; }
+    body { font-family: sans-serif; background: #121212; color: white; text-align: center; padding: 2em; }
+    input, button { padding: 0.6em; margin: 0.3em; border: none; border-radius: 5px; font-size: 1em; }
+    input { width: 60%; }
+    button { background-color: #1e88e5; color: white; cursor: pointer; }
+    .quick-links button { background-color: #333; }
+    #modal {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9); color: white;
+      display: flex; justify-content: center; align-items: center; flex-direction: column;
+    }
   </style>
 </head>
 <body>
-  <h1>🚀 Welcome to My Proxy</h1>
-  <p>Enter a website to visit:</p>
-  <form action="/uv/service/hvtrs8%2F-wuw%2Cgmoelg.pw/" method="GET" onsubmit="event.preventDefault(); go();">
-    <input id="url" placeholder="https://example.com" />
-    <button type="submit">Go</button>
-  </form>
+  <div id="modal">
+    <h2>Terms of Use</h2>
+    <p>This tool is for educational use only.</p>
+    <p><strong>I am not responsible</strong> for what users access using this site.</p>
+    <button onclick="agree()">I Agree</button>
+  </div>
 
-  <footer>
-    <p>⚠️ This proxy is for educational purposes only.</p>
-    <p><strong>I am not responsible</strong> for what users access with this tool.</p>
-  </footer>
+  <h1>🚀 Proxy Portal</h1>
+  <p>Enter a website URL to visit:</p>
+  <input id="url" placeholder="https://example.com" />
+  <button onclick="go()">Go</button>
+
+  <div class="quick-links">
+    <h3>Quick Launch</h3>
+    <button onclick="launch('https://youtube.com')">YouTube</button>
+    <button onclick="launch('https://google.com')">Google</button>
+    <button onclick="launch('https://reddit.com')">Reddit</button>
+  </div>
 
   <script>
+    function agree() {
+      localStorage.setItem("agreed", "true");
+      document.getElementById("modal").style.display = "none";
+    }
+    if (localStorage.getItem("agreed") === "true") {
+      document.getElementById("modal").style.display = "none";
+    }
     function go() {
-      const input = document.getElementById('url').value;
-      if (!input.startsWith("http")) {
-        alert("Please enter a full URL starting with http or https");
-        return;
-      }
-      const encoded = encodeURIComponent(input);
-      window.location.href = '/uv/service/' + encoded;
+      const url = document.getElementById('url').value;
+      if (!url.startsWith("http")) return alert("Please enter a full URL starting with http or https");
+      window.location.href = '/portal/service/' + encodeURIComponent(url);
+    }
+    function launch(site) {
+      window.location.href = '/portal/service/' + encodeURIComponent(site);
     }
   </script>
 </body>
 </html>
-
