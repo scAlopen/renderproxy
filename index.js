@@ -1,11 +1,21 @@
 const express = require('express');
+const { createServer } = require('@titaniumnetwork-dev/ultraviolet');
+const { UVMiddleware } = require('@titaniumnetwork-dev/ultraviolet/middleware');
+
 const app = express();
 const port = process.env.PORT || 8080;
 
+app.use(express.static('public'));
+app.use('/portal/', UVMiddleware(createServer()));
+
 app.get('/', (req, res) => {
-  res.send('Ultraviolet Proxy is running on Render!');
+  res.sendFile(__dirname + '/public/index.html');
+});
+
+app.use((req, res) => {
+  res.status(404).sendFile(__dirname + '/public/error.html');
 });
 
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`Ultraviolet running on port ${port}`);
 });
